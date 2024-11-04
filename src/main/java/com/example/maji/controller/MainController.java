@@ -1,6 +1,7 @@
 package com.example.maji.controller;
 
 import com.example.maji.bean.UserBean;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,8 +10,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @Controller
 public class MainController {
 
+    @Resource(name = "loginUserBean")
+    private UserBean loginUserBean;
+
+    //------------------------------------------------------------------
+
     @GetMapping("/")
-    public String main(@ModelAttribute("tempLoginUserBean") UserBean tempLoginUserBean, Model model) {
+    public String main(Model model) {
+
+        UserBean joinUserBean = new UserBean();
+
+        model.addAttribute("joinUserBean", joinUserBean);
+        model.addAttribute("loginUserBean", loginUserBean);
         return "index_main";
     }
 

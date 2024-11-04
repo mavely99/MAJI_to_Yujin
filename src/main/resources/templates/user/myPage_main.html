@@ -1,20 +1,87 @@
 <!DOCTYPE html>
-<html class="no-js">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Shopping Cart</title>
+	<title>My Page - 쇼핑몰 마이페이지</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<link rel="shortcut icon" href="/favicon.ico">
 	<link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
-	<link rel="stylesheet" href="css/animate.css">
-	<link rel="stylesheet" href="css/icomoon.css">
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="css/flexslider.css">
-	<link rel="stylesheet" href="css/style.css">
 
-	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="/css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="/css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="/css/bootstrap.css">
+
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="/css/flexslider.css">
+
+	<link rel="stylesheet" href="/css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="/js/modernizr-2.6.2.min.js"></script>
+
+	<style>
+		/* 기본적으로 살짝 보이는 사이드바 스타일 */
+		.sidebar {
+			background-color: #fafafa;
+			padding: 20px;
+			position: fixed;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 60px; /* 기본 너비 */
+			box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+			overflow: hidden;
+			transition: width 0.3s ease; /* 너비 변화 효과 */
+		}
+		.sidebar:hover {
+			width: 250px; /* 마우스를 올렸을 때 확장된 너비 */
+		}
+		.sidebar h3 {
+			margin-bottom: 15px;
+			color: #333;
+			opacity: 0; /* 기본 상태에서는 텍스트 숨김 */
+			transition: opacity 0.3s ease;
+		}
+		.sidebar:hover h3 {
+			opacity: 1; /* 마우스를 올렸을 때 텍스트 보이기 */
+		}
+		.sidebar ul {
+			list-style-type: none;
+			padding: 0;
+			opacity: 0; /* 기본 상태에서 항목 숨김 */
+			transition: opacity 0.3s ease;
+		}
+		.sidebar:hover ul {
+			opacity: 1; /* 마우스를 올렸을 때 항목 보이기 */
+		}
+		.sidebar ul li {
+			margin: 10px 0;
+		}
+		.sidebar ul li a {
+			color: #007bff;
+			text-decoration: none;
+			white-space: nowrap;
+		}
+		.sidebar ul li a:hover {
+			text-decoration: underline;
+		}
+		.main-content {
+			margin-left: 70px; /* 기본 사이드바 너비 */
+			transition: margin-left 0.3s ease;
+		}
+		.sidebar:hover ~ .main-content {
+			margin-left: 260px; /* 사이드바 확장 시 메인 콘텐츠 이동 */
+		}
+	</style>
 </head>
 <body>
 
@@ -22,107 +89,71 @@
 
 <div id="fh5co-page">
 	<header>
-		<div class="container">
+		<div class="container main-content">
 			<div class="fh5co-navbar-brand">
-				<h1 class="text-center"><a class="fh5co-logo" href="../index_main.html">Shopping Cart</a></h1>
+				<h1 class="text-center"><a class="fh5co-logo" href="/">My Page</a></h1>
 				<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
 			</div>
 		</div>
 	</header>
 
-	<!-- Cart Section -->
-	<div id="fh5co-cart-section" style="padding-top: 100px; padding-bottom: 100px;">
+	<!-- Sidebar Section -->
+	<div class="sidebar">
+		<h3>My Page Menu</h3>
+		<ul>
+			<li><a href="#account-info">Account Information</a></li>
+			<li><a href="#order-history">Order History</a></li>
+			<li><a href="#cart-wishlist">Cart & Wishlist</a></li>
+			<li><a href="#payment-billing">Payment & Billing</a></li>
+			<li><a href="#product-reviews">Product Reviews</a></li>
+			<li><a href="#notifications">Notifications</a></li>
+			<li><a href="#coupons-points">Coupons & Points</a></li>
+			<li><a href="#shipping-addresses">Shipping Addresses</a></li>
+			<li><a href="#support">Customer Support</a></li>
+			<li><a href="#recommendations">Personalized Recommendations</a></li>
+		</ul>
+	</div>
+
+	<div id="fh5co-intro-section" class="main-content">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 animate-box text-center">
-					<h2 class="cart-heading">Your Cart</h2>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-md-12 animate-box">
-					<div class="cart-table">
-						<table class="table">
-							<thead>
-							<tr>
-								<th>Product</th>
-								<th>Image</th>
-								<th>Price</th>
-								<th>Quantity</th>
-								<th>Total</th>
-								<th>Remove</th>
-							</tr>
-							</thead>
-							<tbody>
-							<!-- Example product row with image -->
-							<tr>
-								<td class="product-name">Phone Case</td>
-								<td class="product-image"><img src="img/phone_case.jpg" alt="Phone Case" style="width: 80px; height: auto;"></td>
-								<td class="product-price">$10.00</td>
-								<td class="product-quantity"><input type="number" value="1" min="1"></td>
-								<td class="product-total">$10.00</td>
-								<td class="product-remove"><a href="#" class="remove">Remove</a></td>
-							</tr>
-							<!-- Additional rows as needed -->
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-
-			<div class="row" style="margin-top: 20px;">
-				<div class="col-md-8 animate-box">
-					<a href="#" class="btn btn-secondary">Continue Shopping</a>
-				</div>
-				<div class="col-md-4 text-right animate-box">
-					<h3>Total: $10.00</h3>
-					<a href="#" class="btn btn-primary">Proceed to Checkout</a>
+					<h2 class="intro-heading">Welcome to Your Account</h2>
+					<p><span>Manage your profile and view your information</span></p>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Recommended Products Section -->
-	<div id="fh5co-recommended-section" style="padding-top: 100px; padding-bottom: 100px; background-color: #f8f8f8;">
+	<!-- User Information Section -->
+	<div id="fh5co-contact-section" class="fh5co-section main-content">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-8 col-md-offset-2 animate-box text-center">
-					<h2 class="recommended-heading">Recommended Products</h2>
-				</div>
-			</div>
-
-			<div class="row">
-				<!-- Example recommended product -->
-				<div class="col-md-3 animate-box text-center">
-					<div class="product">
-						<img src="img/recommended1.jpg" alt="Recommended Product 1" style="width: 100%; height: auto;">
-						<h3>Recommended Product 1</h3>
-						<p>$15.00</p>
-						<a href="#" class="btn btn-primary btn-sm">Add to Cart</a>
-					</div>
-				</div>
-				<div class="col-md-3 animate-box text-center">
-					<div class="product">
-						<img src="img/recommended2.jpg" alt="Recommended Product 2" style="width: 100%; height: auto;">
-						<h3>Recommended Product 2</h3>
-						<p>$20.00</p>
-						<a href="#" class="btn btn-primary btn-sm">Add to Cart</a>
-					</div>
-				</div>
-				<div class="col-md-3 animate-box text-center">
-					<div class="product">
-						<img src="img/recommended3.jpg" alt="Recommended Product 3" style="width: 100%; height: auto;">
-						<h3>Recommended Product 3</h3>
-						<p>$25.00</p>
-						<a href="#" class="btn btn-primary btn-sm">Add to Cart</a>
-					</div>
-				</div>
-				<div class="col-md-3 animate-box text-center">
-					<div class="product">
-						<img src="img/recommended4.jpg" alt="Recommended Product 4" style="width: 100%; height: auto;">
-						<h3>Recommended Product 4</h3>
-						<p>$30.00</p>
-						<a href="#" class="btn btn-primary btn-sm">Add to Cart</a>
+				<div class="col-md-8 col-md-offset-2">
+					<h3>Account Information</h3>
+					<div class="fh5co-contact-info animate-box">
+						<div class="row">
+							<div class="col-md-6">
+								<p><strong>First Name:</strong> [User First Name]</p>
+								<p><strong>First Name (Reading):</strong> [User First Name Phonetic]</p>
+							</div>
+							<div class="col-md-6">
+								<p><strong>Last Name:</strong> [User Last Name]</p>
+								<p><strong>Last Name (Reading):</strong> [User Last Name Phonetic]</p>
+							</div>
+							<div class="col-md-6">
+								<p><strong>Email:</strong> [User Email]</p>
+							</div>
+							<div class="col-md-6">
+								<p><strong>Phone:</strong> [User Phone Number]</p>
+							</div>
+							<div class="col-md-12">
+								<p><strong>Address:</strong> [User Address]</p>
+							</div>
+						</div>
+						<div class="text-center" style="margin-top: 20px;">
+							<a href="#edit-profile" class="btn btn-primary">Edit Profile</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -134,13 +165,13 @@
 
 </div>
 
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.easing.1.3.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.waypoints.min.js"></script>
-<script src="js/jquery.countTo.js"></script>
-<script src="js/jquery.flexslider-min.js"></script>
-<script src="js/main.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.easing.1.3.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.countTo.js"></script>
+<script src="/js/jquery.flexslider-min.js"></script>
+<script src="/js/main.js"></script>
 
 </body>
 </html>
