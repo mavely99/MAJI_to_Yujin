@@ -17,11 +17,6 @@ public class MainController {
 
     @GetMapping("/")
     public String main(Model model) {
-
-        UserBean joinUserBean = new UserBean();
-
-        model.addAttribute("joinUserBean", joinUserBean);
-        model.addAttribute("loginUserBean", loginUserBean);
         return "index_main";
     }
 
