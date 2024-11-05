@@ -11,6 +11,9 @@ public class MainController {
 
     @GetMapping("/")
     public String main(@ModelAttribute("tempLoginUserBean") UserBean tempLoginUserBean, Model model) {
+
+        System.out.println("HELLO WORLD");
+
         return "index_main";
     }
 
