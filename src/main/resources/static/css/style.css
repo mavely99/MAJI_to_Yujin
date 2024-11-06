@@ -454,6 +454,8 @@ header .fh5co-navbar-brand .fh5co-logo:active, header .fh5co-navbar-brand .fh5co
   top: 0;
   right: 0;
 }
+
+
 .fh5co-nav-toggle.active i::before, .fh5co-nav-toggle.active i::after {
   background: #fff;
 }
