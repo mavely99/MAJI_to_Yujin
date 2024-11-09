@@ -1,4 +1,4 @@
-
+<html class="ja" xmlns:th="http://www.w3.org/1999/xhtml">
 <nav th:fragment="top" id="fh5co-main-nav" role="navigation">
     <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle active"><i></i></a>
     <div class="js-fullheight fh5co-table">
@@ -38,7 +38,7 @@
         <div class="modal-content" style="padding: 20px; border: 1px solid #888; background-color: #fefefe; margin: 15% auto; width: 50%; max-width: 400px;">
             <span class="close" onclick="closeModal('loginModal')" style="cursor: pointer; float: right;">&times;</span>
             <h2 style="text-align: center;">로그인</h2>
-            <form th:action="@{/user/login_pro}" method="post" th:object="${loginUserBean}" style="display: flex; flex-direction: column;">
+            <form th:action="@{/include/login_pro}" method="post" th:object="${loginUserBean}" style="display: flex; flex-direction: column;">
                 <label for="userId">ID:</label>
                 <input type="text" id="userId" th:field="*{userId}" required style="margin-bottom: 10px;">
                 <label for="userPass">Password:</label>
@@ -53,7 +53,7 @@
         <div class="modal-content" style="padding: 20px; border: 1px solid #888; background-color: #fefefe; margin: 15% auto; width: 50%; max-width: 400px;">
             <span class="close" onclick="closeModal('joinModal')" style="cursor: pointer; float: right;">&times;</span>
             <h2 style="text-align: center;">회원가입</h2>
-            <form th:action="@{/user/join_pro}" method="post" th:object="${joinUserBean}" style="display: flex; flex-direction: column;">
+            <form th:action="@{/include/join_pro}" method="post" th:object="${joinUserBean}" style="display: flex; flex-direction: column;">
                 <label for="userId">ID:</label>
                 <input type="text" id="userId" th:field="*{userId}" required style="margin-bottom: 10px;">
                 <label for="userPass">Password:</label>
