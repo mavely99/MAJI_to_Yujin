@@ -4,6 +4,7 @@ import com.example.maji.bean.UserBean;
 import com.example.maji.entity.UserEntity;
 import com.example.maji.service.UserService;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.swing.text.html.parser.Entity;
 
 @Controller
 @RequestMapping("/user")
@@ -26,21 +29,10 @@ public class UserController {
 
     //--------------------------------------------
 
-    @ModelAttribute("loginUserBean")
-    public UserBean getLoginUserBean() {
-        return new UserBean();
-    }
-
-    @ModelAttribute("joinUserBean")
-    public UserBean getJoinUserBean() {
-        return new UserBean();
-    }
-
     //회원가입
     @PostMapping("/join_pro")
     public String join_pro(@ModelAttribute("joinUserBean") UserBean joinUserBean, Model model) {
         try {
-
             userService.joinUser(joinUserBean);
             return "redirect:/index_main"; // 리다이렉트 사용
         } catch (IllegalArgumentException e) {
@@ -56,7 +48,6 @@ public class UserController {
         String userPass = loginUserBean.getUserPass();
 
         if (userService.authenticate(userId, userPass)) {
-            loginUserBean.setUserLogin(true); // 로그인 성공
             redirectAttributes.addFlashAttribute("message", "로그인 성공!");
             return "redirect:/index_main";
         } else {
@@ -67,12 +58,11 @@ public class UserController {
 
     @GetMapping("/myPage_main")
     public String myPage(Model model) {
-        // 로그인 여부 확인
+
         if (!loginUserBean.isUserLogin()) {
-            // 로그인이 되어 있지 않으면 로그인 페이지로 리다이렉트
-            return "redirect:/user/login";
+            return "redirect:/index_main";
         }
-        // 로그인된 사용자 ID로 사용자 정보 조회
+
         UserEntity user = userService.getUserByUserId(loginUserBean.getUserId());
 
         if (user == null) {
@@ -94,4 +84,12 @@ public class UserController {
         redirectAttributes.addFlashAttribute("message", "プロフィールが更新されました。");
         return "redirect:/user/myPage_main";
     }
+
+    @GetMapping("/logout")
+    private String logout(HttpSession session) {
+        loginUserBean.setUserLogin(false);
+        session.invalidate(); // 세션 무효화
+        return "redirect:/index_main";
+    }
+
 }
