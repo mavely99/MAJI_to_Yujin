@@ -48,6 +48,7 @@ public class UserController {
             return "index_main";
         }
     }
+
     @PostMapping("/login_pro")
     public String login_pro(@ModelAttribute("loginUserBean") UserBean loginUserBean, RedirectAttributes redirectAttributes) {
 
@@ -66,20 +67,30 @@ public class UserController {
 
     @GetMapping("/myPage_main")
     public String myPage(Model model) {
-        Long userIdx = 952L; // 실제 사용자의 ID
-        UserEntity user = userService.getUserByIdx(userIdx); // 사용자 조회
+        // 로그인 여부 확인
+        if (!loginUserBean.isUserLogin()) {
+            // 로그인이 되어 있지 않으면 로그인 페이지로 리다이렉트
+            return "redirect:/user/login";
+        }
+        // 로그인된 사용자 ID로 사용자 정보 조회
+        UserEntity user = userService.getUserByUserId(loginUserBean.getUserId());
 
         if (user == null) {
             model.addAttribute("message", "User not found."); // 에러 메시지 추가
             return "/user/error"; // 에러 페이지로 이동
         }
 
-        model.addAttribute("user", user); // 모델에 사용자 추가
-        return "user/myPage_main"; // 템플릿 반환
+        // 사용자 정보를 모델에 추가
+        model.addAttribute("user", user);
+
+        return "user/myPage_main"; // 마이페이지 템플릿 반환
     }
+
     @PostMapping("/updateProfile")
     public String updateProfile(@ModelAttribute UserEntity user, RedirectAttributes redirectAttributes) {
-        userService.updateUser(user);
+
+        userService.updateUser(user); // 주입된 userService 사용
+
         redirectAttributes.addFlashAttribute("message", "プロフィールが更新されました。");
         return "redirect:/user/myPage_main";
     }

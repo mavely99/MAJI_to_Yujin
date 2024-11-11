@@ -71,4 +71,8 @@ public class UserService {
         // 업데이트 후 자동으로 저장됨 (Transactional)
     }
 
+    public UserEntity getUserByUserId(String userId) {
+        return userRepository.findByUserId(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + userId));
+    }
 }

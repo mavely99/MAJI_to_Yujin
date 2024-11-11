@@ -3,6 +3,9 @@ package com.example.maji.bean;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
@@ -10,6 +13,8 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @ToString
+@Component
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserBean {
 
     private Long userIdx;
