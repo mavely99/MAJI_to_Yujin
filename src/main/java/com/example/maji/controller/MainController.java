@@ -25,14 +25,14 @@ public class MainController {
         return "index_main";
     }
 
-    @GetMapping("/content_main")
-    public String content_main(Model model) {
-        return "content/content_main";
-    }
-
     @GetMapping("/customizing_main")
     public String customizing_main(Model model) {
         return "customizing/customizing_main";
+    }
+
+    @GetMapping("/content_main")
+    public String content_main(Model model) {
+        return "content/content_main";
     }
 
     @GetMapping("/myPage_main")
