@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -35,17 +36,15 @@ public class UserBean {
 
     private String userAge;
 
-    private Date userDate;
+    private LocalDateTime userDate;
 
     private String userAddress;
 
     private String userImg;
 
-    private String userStatustext;
-
     private String userRole;
 
-    private Long userPoint;
+    private int userPoint;
 
     private String userPhone;
 
