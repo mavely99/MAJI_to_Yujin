@@ -1,4 +1,4 @@
-package com.example.maji.model;
+package com.example.maji.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -11,9 +11,10 @@ import lombok.Setter;
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "user_idx")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+    @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
     private Long userIdx;
+
 
     @Column(name = "user_fn")
     private String userFn;
@@ -55,4 +56,9 @@ public class UserEntity {
     private String userPoint;
 
 
+    // 사용자 이름을 한 번에 설정하는 메소드
+    public void setUserName(String firstName, String lastName) {
+        this.userFn = firstName;
+        this.userLn = lastName;
+    }
 }
