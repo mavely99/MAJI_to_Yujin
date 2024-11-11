@@ -67,7 +67,7 @@
 	</head>
 	<body>
 
-	<header th:replace="include/top :: top"></header>
+	<div th:replace="~{include/top :: top}"></div>
 
 	<div id="fh5co-page">
 		<header>
@@ -292,8 +292,8 @@
 			</div>
 		</div>
 
-		<div th:replace="include/bottom :: bottomDiv"></div>
-		<footer th:replace="include/bottom :: bottomFooter"></footer>
+		<div th:replace="~{include/bottom :: bottomDiv}"></div>
+		<footer th:replace="~{include/bottom :: bottomFooter}"></footer>
 
 	</div>
 

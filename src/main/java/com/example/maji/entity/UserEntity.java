@@ -12,9 +12,9 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
-    @SequenceGenerator(name = "user_seq", sequenceName = "users_seq", allocationSize = 1)
-    @Column(name = "user_idx")
+    @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
     private Long userIdx;
+
 
     @Column(name = "user_fn")
     private String userFn;

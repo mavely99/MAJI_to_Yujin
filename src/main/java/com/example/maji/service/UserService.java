@@ -36,6 +36,7 @@ public class UserService {
 
     //로그인
     public boolean authenticate(String userId, String userPass) {
+
         Optional<UserEntity> user = userRepository.findByUserId(userId);
 
         return user.isPresent() && user.get().getUserPass().equals(userPass);

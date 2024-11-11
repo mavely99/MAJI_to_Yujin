@@ -8,7 +8,6 @@ import java.util.Date;
 
 @Getter
 @Setter
-//@NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class UserBean {
@@ -41,7 +40,9 @@ public class UserBean {
 
     private String userRole;
 
-    private String userPoint;
+    private Long userPoint;
+
+    private String userPhone;
 
     private boolean userIdExist; //아이디 중복확인 여부
 
@@ -51,6 +52,7 @@ public class UserBean {
         this.userLogin = false;   //userLogin의 초기값은 false
         this.userIdExist = false; //userIdExist의 초기값은 false
     }
+
 
 }
 

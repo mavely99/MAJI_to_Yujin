@@ -26,31 +26,44 @@ public class UserController {
 
     //--------------------------------------------
 
-    //회원가입
-    @PostMapping("/join_pro")
-    public String join_pro(@ModelAttribute("joinUserBean") UserBean joinUserBean) {
-
-        userService.joinUser(joinUserBean);
-
-        return "index_main";
+    @ModelAttribute("loginUserBean")
+    public UserBean getLoginUserBean() {
+        return new UserBean();
     }
 
-    //로그인
+    @ModelAttribute("joinUserBean")
+    public UserBean getJoinUserBean() {
+        return new UserBean();
+    }
+
+    //회원가입
+    @PostMapping("/join_pro")
+    public String join_pro(@ModelAttribute("joinUserBean") UserBean joinUserBean, Model model) {
+        try {
+
+            userService.joinUser(joinUserBean);
+            return "redirect:/index_main"; // 리다이렉트 사용
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "index_main";
+        }
+    }
     @PostMapping("/login_pro")
-    public String login_pro(@ModelAttribute("loginUserBean") UserBean loginUserBean,
-                            Model model) {
+    public String login_pro(@ModelAttribute("loginUserBean") UserBean loginUserBean, RedirectAttributes redirectAttributes) {
 
         String userId = loginUserBean.getUserId();
         String userPass = loginUserBean.getUserPass();
 
-        if (userService.authenticate(userId,userPass)) {
-            model.addAttribute("message","성공");
-            return "index_main";
-        }else {
-            model.addAttribute("message", "실패");
-            return "index_main";
+        if (userService.authenticate(userId, userPass)) {
+            loginUserBean.setUserLogin(true); // 로그인 성공
+            redirectAttributes.addFlashAttribute("message", "로그인 성공!");
+            return "redirect:/index_main";
+        } else {
+            redirectAttributes.addFlashAttribute("errorMessage", "아이디 또는 비밀번호가 잘못되었습니다.");
+            return "redirect:/index_main";
         }
     }
+
     @GetMapping("/myPage_main")
     public String myPage(Model model) {
         Long userIdx = 952L; // 실제 사용자의 ID
@@ -58,7 +71,7 @@ public class UserController {
 
         if (user == null) {
             model.addAttribute("message", "User not found."); // 에러 메시지 추가
-            return "error"; // 에러 페이지로 이동
+            return "/user/error"; // 에러 페이지로 이동
         }
 
         model.addAttribute("user", user); // 모델에 사용자 추가
