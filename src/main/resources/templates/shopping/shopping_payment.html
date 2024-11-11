@@ -8,13 +8,13 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
-	<link rel="stylesheet" href="css/animate.css">
-	<link rel="stylesheet" href="css/icomoon.css">
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="css/flexslider.css">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="/css/animate.css">
+	<link rel="stylesheet" href="/css/icomoon.css">
+	<link rel="stylesheet" href="/css/bootstrap.css">
+	<link rel="stylesheet" href="/css/flexslider.css">
+	<link rel="stylesheet" href="/css/style.css">
 
-	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="/js/modernizr-2.6.2.min.js"></script>
 </head>
 <body>
 
@@ -42,15 +42,15 @@
 					<form action="#" method="POST">
 						<div class="form-group">
 							<label for="name">Full Name</label>
-							<input type="text" id="name" class="form-control" placeholder="Your Name">
+							<input type="text" id="name" class="form-control" th:placeholder="${loginUserBean.userFn + ' ' + loginUserBean.userLn}" readonly="readonly">
 						</div>
 						<div class="form-group">
 							<label for="email">Email Address</label>
-							<input type="email" id="email" class="form-control" placeholder="Your Email">
+							<input type="email" id="email" class="form-control" th:placeholder="${loginUserBean.userAddress}" readonly="readonly">
 						</div>
 						<div class="form-group">
 							<label for="points">Available Points</label>
-							<p class="form-control-static" id="points">You have 500 points</p>
+							<p th:text="${loginUserBean.userPoint}" class="form-control-static" id="points"></p>
 						</div>
 						<div class="form-group">
 							<label for="usePoints">Use Points</label>
@@ -111,13 +111,13 @@
 <div th:replace="include/bottom :: bottomDiv"></div>
 <footer th:replace="include/bottom :: bottomFooter"></footer>
 
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.easing.1.3.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.waypoints.min.js"></script>
-<script src="js/jquery.countTo.js"></script>
-<script src="js/jquery.flexslider-min.js"></script>
-<script src="js/main.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.easing.1.3.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.countTo.js"></script>
+<script src="/js/jquery.flexslider-min.js"></script>
+<script src="/js/main.js"></script>
 
 </body>
 </html>
