@@ -3,6 +3,7 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html class="ja" xmlns:th="http://www.w3.org/1999/xhtml">
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -66,13 +67,14 @@
 	</head>
 	<body>
 
-	<header th:replace="include/top :: top"></header>
+	<div th:replace="~{include/top :: top}"></div>
 
 	<div id="fh5co-page">
 		<header>
 			<div class="container">
 				<div class="fh5co-navbar-brand">
-					<h1 class="text-center"><a class="fh5co-logo" href="index_main.html">Minimal</a></h1>
+
+					<h1 class="text-center"><a class="fh5co-logo" href="index_main.html">Minimal!</a></h1>
 
 					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
 				</div>
@@ -290,8 +292,8 @@
 			</div>
 		</div>
 
-		<div th:replace="include/bottom :: bottomDiv"></div>
-		<footer th:replace="include/bottom :: bottomFooter"></footer>
+		<div th:replace="~{include/bottom :: bottomDiv}"></div>
+		<footer th:replace="~{include/bottom :: bottomFooter}"></footer>
 
 	</div>
 
