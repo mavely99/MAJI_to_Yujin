@@ -1,6 +1,8 @@
 package com.example.maji.controller;
 
+import com.example.maji.bean.ContentBean;
 import com.example.maji.bean.UserBean;
+import com.example.maji.entity.ShoppingCartEntity;
 import com.example.maji.service.ShoppingService;
 import com.example.maji.service.UserService;
 import jakarta.annotation.Resource;
@@ -10,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/shopping")
@@ -28,6 +32,8 @@ public class ShoppingController {
 
     @GetMapping("/cart")
     public String cart() {
+
+        List<ShoppingCartEntity> shoppingCartList = shoppingService.getShoppingCart(loginUserBean.getUserIdx());
 
         return "shopping/shopping_cart";
     }

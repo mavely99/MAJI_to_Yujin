@@ -1,5 +1,6 @@
 package com.example.maji.service;
 
+import com.example.maji.bean.ContentBean;
 import com.example.maji.bean.UserBean;
 import com.example.maji.entity.UserEntity;
 import com.example.maji.repository.UserRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -89,4 +91,6 @@ public class UserService {
         return userRepository.findByUserId(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found: " + userId));
     }
+
+
 }
