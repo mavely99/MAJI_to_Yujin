@@ -25,6 +25,11 @@ public class MainController {
         return "index_main";
     }
 
+    @GetMapping("/need_login")
+    public String need_login(Model model) {
+        return "alert/need_login";
+    }
+
     @GetMapping("/customizing_main")
     public String customizing_main(Model model) {
         return "customizing/customizing_main";

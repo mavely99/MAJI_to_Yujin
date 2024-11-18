@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -63,10 +64,14 @@ public class UserEntity {
     @Column(name = "user_phone")
     private String userPhone;
 
-
     // 사용자 이름을 한 번에 설정하는 메소드
     public void setUserName(String firstName, String lastName) {
         this.userFn = firstName;
         this.userLn = lastName;
     }
+
+    //-----------------------------
+
+    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ShoppingCartEntity> shoppingCarts;
 }
