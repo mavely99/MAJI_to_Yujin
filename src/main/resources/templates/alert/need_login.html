@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        Swal.fire({
+            title: '로그인이 필요합니다',
+            text: '먼저 로그인을 해주세요',
+            icon: 'warning',
+            confirmButtonText: '확인'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = 'index_main';
+            }
+        });
+    });
+</script>
