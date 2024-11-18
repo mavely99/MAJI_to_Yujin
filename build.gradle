@@ -15,6 +15,7 @@ java {
 
 repositories {
 	mavenCentral()
+	maven { url 'https://repo.webjars.org/webjars' }
 }
 
 dependencies {
@@ -33,6 +34,7 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	implementation 'org.webjars:bootstrap:5.3.1'
 	implementation 'org.webjars:jquery:3.6.0'
+	implementation 'org.webjars:summernote:0.8.16'
 }
 
 tasks.named('test') {

@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" xmlns:th="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
+<html class="no-js" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,23 +10,27 @@
   <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
 
-  <!-- Animate.css -->
-  <link rel="stylesheet" href="/css/animate.css">
-  <!-- Icomoon Icon Fonts-->
-  <link rel="stylesheet" href="/css/icomoon.css">
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="/css/bootstrap.css">
-  <!-- Flexslider -->
-  <link rel="stylesheet" href="/css/flexslider.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
   <!-- Custom Style -->
   <link rel="stylesheet" href="/css/style.css">
 
-  <!-- Modernizr JS -->
-  <script src="/js/modernizr-2.6.2.min.js"></script>
-  <!-- FOR IE9 below -->
-  <!--[if lt IE 9]>
-  <script src="/js/respond.min.js"></script>
-  <![endif]-->
+  <!-- Summernote CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
+
+  <style>
+    .modal {
+      position: fixed;
+      z-index: 1050;
+      overflow: hidden;
+      outline: 0;
+    }
+
+    .note-editor .modal-dialog {
+      margin-top: 100px;
+    }
+  </style>
 </head>
 <body>
 
@@ -49,44 +49,91 @@
   <div id="fh5co-intro-section">
     <div class="container">
       <div class="row">
-        <div class="col-md-8 col-md-offset-2 animate-box text-center">
+        <div class="col-md-8 col-md-offset-2 text-center">
           <h2 class="intro-heading" th:text="${customizingInfoName}"></h2>
           <p><span>Placeholder content can go here</span></p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <h2 class="intro-heading" th:text="${customizingInfoName}"></h2>
-  <p>IDX 값: <span th:text="${customizingInfoIdx}"></span></p>
-  <!-- 빈 콘텐츠 섹션 -->
-  <div id="fh5co-empty-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <p>여기에 내용을 추가하세요.</p>
+
+          <!-- Summernote 에디터 -->
+          <div class="post-form">
+
+            <form action="/customizing/save" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="customizingInfoIdx" th:value="${customizingInfoIdx}"/>
+              <h2 class="intro-heading" th:text="${userIdx}"></h2>
+              <h2 class="intro-heading" th:text="${customizingInfoIdx}"></h2>
+
+              <label>제목:</label>
+              <input type="text" name="customizingTitle" class="form-control" required><br>
+
+              <label>내용:</label>
+              <textarea id="summernote" name="customizingContent"></textarea><br>
+
+              <button type="submit">저장</button>
+            </form>
+
+          </div>
+
         </div>
       </div>
     </div>
   </div>
 
-  <div th:replace="include/bottom :: bottomDiv"></div>
   <footer th:replace="include/bottom :: bottomFooter"></footer>
 </div>
 
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-<!-- jQuery Easing -->
-<script src="/js/jquery.easing.1.3.js"></script>
-<!-- Bootstrap -->
-<script src="/js/bootstrap.min.js"></script>
-<!-- Waypoints -->
-<script src="/js/jquery.waypoints.min.js"></script>
-<!-- Counters -->
-<script src="/js/jquery.countTo.js"></script>
-<!-- Flexslider -->
-<script src="/js/jquery.flexslider-min.js"></script>
-<!-- Main JS -->
-<script src="/js/main.js"></script>
+<!-- jQuery 먼저 로드 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- Summernote JS -->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#summernote').summernote({
+      height: 800,
+      lang: 'ko-KR',
+      toolbar: [
+        ['fontsize', ['fontsize']],
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['color', ['color']],
+        ['table', ['table']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['insert', ['hr']]
+      ],
+      fontNames: ['Arial', 'Comic Sans MS', '맑은 고딕', '궁서', '굴림체'],
+      callbacks: {
+        onImageUpload: function(files) {
+          for (let file of files) {
+            uploadImage(file);
+          }
+        }
+      }
+    });
+  });
+
+  // 서버로 이미지 업로드
+  function uploadImage(file) {
+    let formData = new FormData();
+    formData.append("file", file);
+
+    $.ajax({
+      url: '/customizing/uploadImage',  // 서버로 전송될 URL
+      type: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(response) {
+        // 업로드가 성공하면 이미지의 URL을 editor에 삽입
+        $('#summernote').summernote('insertImage', response.url);
+      },
+      error: function() {
+        alert("이미지 업로드에 실패했습니다.");
+      }
+    });
+  }
+</script>
 
 </body>
 </html>

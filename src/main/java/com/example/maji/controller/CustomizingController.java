@@ -1,42 +1,57 @@
 package com.example.maji.controller;
 
+import com.example.maji.bean.CustomizingBean;
+import com.example.maji.bean.UserBean;
 import com.example.maji.service.CustomizingService;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
 
 @Controller
 @RequestMapping("/customizing")
 public class CustomizingController {
 
+    private final CustomizingService customizingService;
+
+    @Resource(name = "loginUserBean")
+    private UserBean loginUserBean;
+
     @Autowired
-    private CustomizingService customizingService;
-
-
-
-    @GetMapping("/customizing_main")
-    public String customizing_main(@RequestParam("customizingInfoIdx") long customizingInfoIdx, Model model) {
-
-        // 모델에 customizingInfoIdx 넘겨주기
-        model.addAttribute("customizingInfoIdx", customizingInfoIdx);
-
-        // customizing_main 페이지로 이동
-        return "customizing/customizing_main";
+    public CustomizingController(CustomizingService customizingService) {
+        this.customizingService = customizingService;
     }
 
+    // 커스터마이징 페이지 이동
+    @GetMapping("/customizing_main")
+    public String customizing_main(@RequestParam("customizingInfoIdx") long customizingInfoIdx, Model model) {
+        model.addAttribute("customizingInfoIdx", customizingInfoIdx);
+        return "customizing/customizing_main";
+    }
+    // 커스터마이징 만들기 페이지로 이동
     @GetMapping("/customizing_make")
-    public String customizing_make(@RequestParam("customizingInfoIdx")long customizingInfoIdx, Model model) {
+    public String customizing_make(@RequestParam("customizingInfoIdx") long customizingInfoIdx, Model model) {
 
-        // customizingInfoIdx를 기반으로 이름을 찾아서
         String customizingInfoName = customizingService.findCustomizingInfoName(customizingInfoIdx);
 
-        // 모델에 customizingInfoName을 추가
         model.addAttribute("customizingInfoName", customizingInfoName);
         model.addAttribute("customizingInfoIdx", customizingInfoIdx);
+        model.addAttribute("userIdx", loginUserBean.getUserIdx());
 
         return "customizing/customizing_make";
     }
+
+    //커스터마이징 게시글 저장
+    @PostMapping("/save")
+    public String customizing_save(@ModelAttribute CustomizingBean customizingBean) {
+
+        customizingService.saveCustomizing(customizingBean);
+
+        return "redirect:/customizing/customizing_main?customizingInfoIdx=" + customizingBean.getCustomizingInfoIdx();
+    }
+
+
 }
