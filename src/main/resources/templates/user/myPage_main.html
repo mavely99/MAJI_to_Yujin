@@ -2,41 +2,48 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" xmlns:th="http://www.w3.org/1999/xhtml">
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html class="ja" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>My Page - 쇼핑몰 마이페이지</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" href="/favicon.ico">
+	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
+	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+	<meta name="author" content="FREEHTML5.CO" />
+	<link rel="shortcut icon" href="favicon.ico">
 	<link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
 
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="/css/animate.css">
+	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="/css/icomoon.css">
+	<link rel="stylesheet" href="css/icomoon.css">
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="/css/bootstrap.css">
-
+	<link rel="stylesheet" href="css/bootstrap.css">
 	<!-- Flexslider  -->
-	<link rel="stylesheet" href="/css/flexslider.css">
+	<link rel="stylesheet" href="css/flexslider.css">
 
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="css/style.css">
 
 	<!-- Modernizr JS -->
-	<script src="/js/modernizr-2.6.2.min.js"></script>
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
 
 	<style>
+
 		/* 기본적으로 살짝 보이는 사이드바 스타일 */
 		.sidebar {
 			background-color: #fafafa;
 			padding: 20px;
 			position: fixed;
-			top: 0;
+			top: 100px; /* 헤더 아래로 위치시키기 */
 			left: 0;
-			height: 100%;
+			height: calc(100% - 100px); /* 헤더 높이만큼 뺀 나머지 화면 높이 */
 			width: 60px; /* 기본 너비 */
 			box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
 			overflow: hidden;
@@ -81,17 +88,35 @@
 		.sidebar:hover ~ .main-content {
 			margin-left: 260px; /* 사이드바 확장 시 메인 콘텐츠 이동 */
 		}
+
+		header {
+            width: 100%;
+            background-color: #fff;
+            z-index: 1001;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+        }
+		.fh5co-navbar-brand {
+			margin: 0;
+			text-align: center;
+		}
+		 .intro-heading {
+            margin-top: 40px;
+        }
 	</style>
 </head>
 <body>
 
-<header th:replace="include/top :: top"></header>
+<header th:replace="~{include/top :: top}"></header>
 
 <div id="fh5co-page">
 	<header>
-		<div class="container main-content">
+		<div class="container">
 			<div class="fh5co-navbar-brand">
-				<h1 class="text-center"><a class="fh5co-logo" href="/">My Page</a></h1>
+				<h1 class="text-center"><a class="fh5co-logo" href="myPage_main.html">My Page</a></h1>
 				<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
 			</div>
 		</div>
@@ -103,7 +128,7 @@
 		<ul>
 			<li><a href="#account-info">Account Information</a></li>
 			<li><a href="#order-history">Order History</a></li>
-			<li><a href="#cart-wishlist">Cart & Wishlist</a></li>
+			<li><a href="/shopping/cart">Cart & Wishlist</a></li>
 			<li><a href="#payment-billing">Payment & Billing</a></li>
 			<li><a href="#product-reviews">Product Reviews</a></li>
 			<li><a href="#notifications">Notifications</a></li>
@@ -129,39 +154,32 @@
 	<div id="fh5co-contact-section" class="fh5co-section main-content">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-8 col-md-offset-2">
-					<h3>Account Information</h3>
-					<div class="fh5co-contact-info animate-box">
-						<div class="row">
-							<div class="col-md-6">
-								<p><strong>First Name:</strong> [User First Name]</p>
-								<p><strong>First Name (Reading):</strong> [User First Name Phonetic]</p>
-							</div>
-							<div class="col-md-6">
-								<p><strong>Last Name:</strong> [User Last Name]</p>
-								<p><strong>Last Name (Reading):</strong> [User Last Name Phonetic]</p>
-							</div>
-							<div class="col-md-6">
-								<p><strong>Email:</strong> [User Email]</p>
-							</div>
-							<div class="col-md-6">
-								<p><strong>Phone:</strong> [User Phone Number]</p>
-							</div>
-							<div class="col-md-12">
-								<p><strong>Address:</strong> [User Address]</p>
-							</div>
-						</div>
-						<div class="text-center" style="margin-top: 20px;">
-							<a href="#edit-profile" class="btn btn-primary">Edit Profile</a>
-						</div>
+				<!-- user 객체가 null이 아닌 경우 -->
+				<div th:if="${user != null}">
+					<div class="col-md-6">
+
+						<p><strong>First Name:</strong> <span th:text="${user.userFn}">[User First Name]</span></p>
+						<p><strong>First Name (Reading):</strong> <span th:text="${user.userFny}">[First Name (Phonetic)]</span></p>
 					</div>
+					<div class="col-md-6">
+						<p><strong>Last Name:</strong> <span th:text="${user.userLn}">[User Last Name]</span></p>
+						<p><strong>Last Name (Reading):</strong> <span th:text="${user.userLny}">[User Last Name Phonetic]</span></p>
+					</div>
+					<div class="col-md-6">
+						<p><strong>Email:</strong> <span th:text="${user.userEmail}">[User Email]</span></p>
+					</div>
+				</div>
+
+				<!-- user 객체가 null인 경우 -->
+				<div th:if="${user == null}">
+					<p>No user information available.</p>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div th:replace="include/bottom :: bottomDiv"></div>
-	<footer th:replace="include/bottom :: bottomFooter"></footer>
+	<div th:replace="~{include/bottom :: bottomDiv}"></div>
+	<footer th:replace="~{include/bottom :: bottomFooter}"></footer>
 
 </div>
 

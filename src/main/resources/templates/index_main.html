@@ -1,8 +1,10 @@
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" xmlns:th="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
 <html class="ja" xmlns:th="http://www.w3.org/1999/xhtml">
 	<head>
 	<meta charset="utf-8">
@@ -13,12 +15,12 @@
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
 	<meta name="author" content="FREEHTML5.CO" />
 
-  <!-- 
+  <!--
 	//////////////////////////////////////////////////////
 
-	FREE HTML5 TEMPLATE 
+	FREE HTML5 TEMPLATE
 	DESIGNED & DEVELOPED by FREEHTML5.CO
-		
+
 	Website: 		http://freehtml5.co/
 	Email: 			info@freehtml5.co
 	Twitter: 		http://twitter.com/fh5co
@@ -43,14 +45,14 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
-	
+
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
 	<link rel="stylesheet" href="css/icomoon.css">
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="css/bootstrap.css">
-	
+
 	<!-- Flexslider  -->
 	<link rel="stylesheet" href="css/flexslider.css">
 
@@ -67,7 +69,7 @@
 	</head>
 	<body>
 
-	<header th:replace="include/top :: top"></header>
+	<div th:replace="~{include/top :: top}"></div>
 
 	<div id="fh5co-page">
 		<header>
@@ -292,9 +294,18 @@
 			</div>
 		</div>
 
-		<div th:replace="include/bottom :: bottomDiv"></div>
-		<footer th:replace="include/bottom :: bottomFooter"></footer>
+		<div th:replace="~{include/bottom :: bottomDiv}"></div>
+		<footer th:replace="~{include/bottom :: bottomFooter}"></footer>
 
+	</div>
+	<div>
+		<h1>Welcome</h1>
+		<p th:if="${loginUserBean != null}">
+			Logged in as: <span th:text="${loginUserBean.userId}"></span>
+		</p>
+		<p th:if="${loginUserBean == null}">
+			Please log in.
+		</p>
 	</div>
 
 	<!-- jQuery -->
