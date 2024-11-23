@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -16,4 +18,9 @@ public class CustomizingInfoEntity {
 
     @Column(name = "customizing_info_name")
     private String customizingInfoName;
+
+    //-----------------------------
+
+    @OneToMany(mappedBy = "customizingInfoEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CustomizingEntity> customizingEntities;
 }

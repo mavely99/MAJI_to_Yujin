@@ -42,11 +42,14 @@ public class CustomizingService {
 
         CustomizingEntity customizingEntity = new CustomizingEntity();
 
+        customizingEntity.setCustomizingIdx(customizingBean.getCustomizingIdx());
         customizingEntity.setCustomizingTitle(customizingBean.getCustomizingTitle());
         customizingEntity.setCustomizingContent(customizingBean.getCustomizingContent());
         customizingEntity.setCustomizingDate(LocalDateTime.now());
         customizingEntity.setCustomizingImg(customizingBean.getCustomizingImg());
         customizingEntity.setCustomizingViewCount(customizingBean.getCustomizingViewCount());
+        customizingEntity.setCustomizingInfoIdx(customizingBean.getCustomizingInfoIdx());
+        customizingEntity.setUserIdx(customizingBean.getUserIdx());
 
         customizingRepository.save(customizingEntity);
     }

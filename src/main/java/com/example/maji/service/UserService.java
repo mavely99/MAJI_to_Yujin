@@ -53,6 +53,7 @@ public class UserService {
 
         UserEntity loginUserEntity = getUserByUserId(userId);
 
+        loginUserBean.setUserIdx(loginUserEntity.getUserIdx());
         loginUserBean.setUserFn(loginUserEntity.getUserFn());
         loginUserBean.setUserFny(loginUserEntity.getUserFny());
         loginUserBean.setUserLn(loginUserEntity.getUserLn());

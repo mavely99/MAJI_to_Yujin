@@ -50,7 +50,7 @@ public class CustomizingController {
 
         customizingService.saveCustomizing(customizingBean);
 
-        return "redirect:/customizing/customizing_main?customizingInfoIdx=" + customizingBean.getCustomizingInfoIdx();
+        return "alert/success_customizing";
     }
 
 

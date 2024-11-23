@@ -20,7 +20,7 @@ public class ShoppingCartEntity {
     private UserEntity userEntity;
 
     @ManyToOne
-    @JoinColumn(name = "content_idx", insertable = false, updatable = false)
-    private ContentEntity contentEntity;
+    @JoinColumn(name = "customizing_idx", insertable = false, updatable = false)
+    private CustomizingEntity customizingEntity;
 
 }

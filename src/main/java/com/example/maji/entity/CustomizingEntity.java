@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,8 +17,8 @@ import java.time.LocalDateTime;
 public class CustomizingEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "customizing_idx")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customizing_seq")
+    @SequenceGenerator(name = "customizing_seq", sequenceName = "customizing_seq", allocationSize = 1)
     private Long customizingIdx;
 
     @Column(name = "customizing_title", nullable = false)
@@ -36,16 +37,26 @@ public class CustomizingEntity {
     @Column(name = "customizing_view_count", columnDefinition = "NUMBER DEFAULT 0")
     private Integer customizingViewCount = 0; //조회수
 
+    @Column(name = "user_idx")
+    private Long userIdx;
 
-/*---------------------------JoIn--------------------------------------------------------------------------*/
+    @Column(name = "customizing_info_idx")
+    private Long customizingInfoIdx;
 
-    // 1. 자기 자신과의 연관 관계 (부모-자식 관계)
+    //-----------------------------
+
+    @OneToMany(mappedBy = "customizingEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ShoppingCartEntity> shoppingCarts;
+
+    //-----------------------------
+
     @ManyToOne
-    @JoinColumn(name = "parent_customizing_idx")
-    private CustomizingEntity parentCustomizing; // 부모 글
+    @JoinColumn(name = "user_idx", insertable = false, updatable = false)
+    private UserEntity userEntity;
 
-    // 2. 사용자 정보와의 연관 관계
     @ManyToOne
-    @JoinColumn(name = "user_idx")
-    private UserEntity userEntity; // 사용자 정보
+    @JoinColumn(name = "customizing_info_idx", insertable = false, updatable = false)
+    private CustomizingInfoEntity customizingInfoEntity;
+
+
 }

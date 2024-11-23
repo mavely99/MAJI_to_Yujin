@@ -5,32 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Empty Page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
-
-  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-  <!-- Custom Style -->
   <link rel="stylesheet" href="/css/style.css">
-
-  <!-- Summernote CSS -->
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
-
-  <style>
-    .modal {
-      position: fixed;
-      z-index: 1050;
-      overflow: hidden;
-      outline: 0;
-    }
-
-    .note-editor .modal-dialog {
-      margin-top: 100px;
-    }
-  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
+  <link rel="stylesheet" href="/css/customizing_make.css">
 </head>
 <body>
 
@@ -57,12 +38,50 @@
           <div class="post-form">
 
             <form action="/customizing/save" method="post" enctype="multipart/form-data">
-              <input type="hidden" name="customizingInfoIdx" th:value="${customizingInfoIdx}"/>
-              <h2 class="intro-heading" th:text="${userIdx}"></h2>
-              <h2 class="intro-heading" th:text="${customizingInfoIdx}"></h2>
+              <input type="hidden" id="customizingInfoIdx" name="customizingInfoIdx" th:value="${customizingInfoIdx}"/>
+              <input type="hidden" name="userIdx" th:value="${userIdx}"/>
+              <input type="hidden" name="customizingImg" id="customizingImgField"/>
 
               <label>제목:</label>
               <input type="text" name="customizingTitle" class="form-control" required><br>
+
+              <button type="button" class="btn btn-secondary" id="openModalBtn" th:text="${customizingInfoName} + ' Customizing'"></button><br><br>
+
+
+              <!-- 모달 -->
+              <div id="myModal" class="modal">
+                <div class="modal-content">
+                  <span class="close" id="closeModalBtn">&times;</span>
+
+                  <div id="canvas-container">
+                    <canvas id="canvas"></canvas>
+                  </div>
+
+                  <div class="tool-container">
+                    <button id="dragModeBtn" type="button">Drag Mode</button>
+                    <button id="penBtn" type="button">Draw Mode</button>
+                    <select id="brushTypeSelect">
+                      <option value="pen">Pen</option>
+                      <option value="bubble">Bubble</option>
+                      <option value="spray">Spray</option>
+
+                    </select>
+
+
+                    <!-- 색상 선택기 -->
+                    <input type="color" id="colorPicker" value="#000000">
+
+                    <!-- 브러시 크기 선택기 -->
+                    <input type="range" id="brushSize" min="1" max="10" value="2">
+
+                    <!-- 이미지 업로드 -->
+                    <input type="file" id="fileInput" accept="image/*">
+
+                    <!-- 저장 버튼 -->
+                    <button id="saveBtn" type="button">등록</button>
+                  </div>
+                </div>
+              </div>
 
               <label>내용:</label>
               <textarea id="summernote" name="customizingContent"></textarea><br>
@@ -71,7 +90,6 @@
             </form>
 
           </div>
-
         </div>
       </div>
     </div>
@@ -80,60 +98,10 @@
   <footer th:replace="include/bottom :: bottomFooter"></footer>
 </div>
 
-<!-- jQuery 먼저 로드 -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<!-- Summernote JS -->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
-
-<script>
-  $(document).ready(function() {
-    $('#summernote').summernote({
-      height: 800,
-      lang: 'ko-KR',
-      toolbar: [
-        ['fontsize', ['fontsize']],
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['color', ['color']],
-        ['table', ['table']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['insert', ['hr']]
-      ],
-      fontNames: ['Arial', 'Comic Sans MS', '맑은 고딕', '궁서', '굴림체'],
-      callbacks: {
-        onImageUpload: function(files) {
-          for (let file of files) {
-            uploadImage(file);
-          }
-        }
-      }
-    });
-  });
-
-  // 서버로 이미지 업로드
-  function uploadImage(file) {
-    let formData = new FormData();
-    formData.append("file", file);
-
-    $.ajax({
-      url: '/customizing/uploadImage',  // 서버로 전송될 URL
-      type: 'POST',
-      data: formData,
-      processData: false,
-      contentType: false,
-      success: function(response) {
-        // 업로드가 성공하면 이미지의 URL을 editor에 삽입
-        $('#summernote').summernote('insertImage', response.url);
-      },
-      error: function() {
-        alert("이미지 업로드에 실패했습니다.");
-      }
-    });
-  }
-</script>
+<script src="/js/customizing_make.js"></script>
 
 </body>
 </html>

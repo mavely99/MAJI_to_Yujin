@@ -4,13 +4,13 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         Swal.fire({
-            title: '로그인이 필요합니다',
-            text: '먼저 로그인을 해주세요',
-            icon: 'warning',
+            title: '커스터마이징 성공',
+            text: '게시판을 확인해주세요',
+            icon: 'success',
             confirmButtonText: '확인'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = 'index_main';
+                window.location.href = '/index_main';
             }
         });
     });
