@@ -48,6 +48,7 @@ public class CustomizingService {
         customizingEntity.setCustomizingDate(LocalDateTime.now());
         customizingEntity.setCustomizingImg(customizingBean.getCustomizingImg());
         customizingEntity.setCustomizingViewCount(customizingBean.getCustomizingViewCount());
+        customizingEntity.setCustomizingPrice(customizingBean.getCustomizingPrice());
         customizingEntity.setCustomizingInfoIdx(customizingBean.getCustomizingInfoIdx());
         customizingEntity.setUserIdx(customizingBean.getUserIdx());
 

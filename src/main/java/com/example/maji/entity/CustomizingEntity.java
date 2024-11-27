@@ -37,6 +37,9 @@ public class CustomizingEntity {
     @Column(name = "customizing_view_count", columnDefinition = "NUMBER DEFAULT 0")
     private Integer customizingViewCount = 0; //조회수
 
+    @Column(name = "customizing_price")
+    private Long customizingPrice;
+
     @Column(name = "user_idx")
     private Long userIdx;
 
