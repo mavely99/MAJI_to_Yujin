@@ -24,6 +24,8 @@ public class CustomizingBean {
 
     private Integer customizingViewCount = 0;
 
+    private Long customizingPrice;
+
     private Long customizingInfoIdx;
 
     private Long userIdx;
