@@ -1,195 +1,215 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<html class="ja" xmlns:th="http://www.w3.org/1999/xhtml">
+<html class="no-js" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>My Page - 쇼핑몰 마이페이지</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
-	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
-	<meta name="author" content="FREEHTML5.CO" />
-	<link rel="shortcut icon" href="favicon.ico">
-	<link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My Page - 쇼핑몰 마이페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO">
+    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive">
+    <meta name="author" content="FREEHTML5.CO">
 
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<!-- Flexslider  -->
-	<link rel="stylesheet" href="css/flexslider.css">
+    <!-- Fonts and CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karla:400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/css/icomoon.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/flexslider.css">
+    <link rel="stylesheet" href="/css/style.css">
 
-	<link rel="stylesheet" href="css/style.css">
+    <!-- JavaScript -->
+    <script src="/js/modernizr-2.6.2.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.easing.1.3.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.waypoints.min.js"></script>
+    <script src="/js/jquery.countTo.js"></script>
+    <script src="/js/jquery.flexslider-min.js"></script>
+    <script src="/js/main.js"></script>
 
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
-
-	<style>
-
-		/* 기본적으로 살짝 보이는 사이드바 스타일 */
-		.sidebar {
-			background-color: #fafafa;
-			padding: 20px;
-			position: fixed;
-			top: 100px; /* 헤더 아래로 위치시키기 */
-			left: 0;
-			height: calc(100% - 100px); /* 헤더 높이만큼 뺀 나머지 화면 높이 */
-			width: 60px; /* 기본 너비 */
-			box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
-			overflow: hidden;
-			transition: width 0.3s ease; /* 너비 변화 효과 */
-		}
-		.sidebar:hover {
-			width: 250px; /* 마우스를 올렸을 때 확장된 너비 */
-		}
-		.sidebar h3 {
-			margin-bottom: 15px;
-			color: #333;
-			opacity: 0; /* 기본 상태에서는 텍스트 숨김 */
-			transition: opacity 0.3s ease;
-		}
-		.sidebar:hover h3 {
-			opacity: 1; /* 마우스를 올렸을 때 텍스트 보이기 */
-		}
-		.sidebar ul {
-			list-style-type: none;
-			padding: 0;
-			opacity: 0; /* 기본 상태에서 항목 숨김 */
-			transition: opacity 0.3s ease;
-		}
-		.sidebar:hover ul {
-			opacity: 1; /* 마우스를 올렸을 때 항목 보이기 */
-		}
-		.sidebar ul li {
-			margin: 10px 0;
-		}
-		.sidebar ul li a {
-			color: #007bff;
-			text-decoration: none;
-			white-space: nowrap;
-		}
-		.sidebar ul li a:hover {
-			text-decoration: underline;
-		}
-		.main-content {
-			margin-left: 70px; /* 기본 사이드바 너비 */
-			transition: margin-left 0.3s ease;
-		}
-		.sidebar:hover ~ .main-content {
-			margin-left: 260px; /* 사이드바 확장 시 메인 콘텐츠 이동 */
-		}
-
-		header {
+    <style>
+        .sidebar {
+            background-color: #fafafa;
+            padding: 20px;
+            position: fixed;
+            top: 100px;
+            left: 0;
+            height: calc(100% - 100px);
+            width: 60px;
+            box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: width 0.3s ease;
+        }
+        .sidebar:hover {
+            width: 250px;
+        }
+        .sidebar h3 {
+            margin-bottom: 15px;
+            color: #333;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .sidebar:hover h3 {
+            opacity: 1;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .sidebar:hover ul {
+            opacity: 1;
+        }
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+        .sidebar ul li a {
+            color: #000; /* 기본 검은색 */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .sidebar ul li a:hover {
+            color: #007bff; /* 마우스 올리면 파란색 */
+            text-decoration: underline;
+        }
+        .main-content {
+            margin-left: 70px;
+            transition: margin-left 0.3s ease;
+        }
+        .sidebar:hover ~ .main-content {
+            margin-left: 260px;
+        }
+        header {
             width: 100%;
             background-color: #fff;
             z-index: 1001;
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
             padding: 10px 0;
-			display: flex;
-			justify-content: center;
-			align-items: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-		.fh5co-navbar-brand {
-			margin: 0;
-			text-align: center;
-		}
-		 .intro-heading {
+        .fh5co-navbar-brand {
+            margin: 0;
+            text-align: center;
+        }
+        .intro-heading {
             margin-top: 40px;
         }
-	</style>
+        input[readonly] {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+        }
+        .btn-spacing {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 <body>
 
-<header th:replace="~{include/top :: top}"></header>
-
 <div id="fh5co-page">
-	<header>
-		<div class="container">
-			<div class="fh5co-navbar-brand">
-				<h1 class="text-center"><a class="fh5co-logo" href="myPage_main.html">My Page</a></h1>
-				<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-			</div>
-		</div>
-	</header>
+    <header th:replace="~{include/top :: top}">
+        <div class="container">
+            <div class="fh5co-navbar-brand">
+                <h1 class="text-center"><a class="fh5co-logo" href="myPage_main.html">My Page</a></h1>
+            </div>
+        </div>
+    </header>
 
-	<!-- Sidebar Section -->
-	<div class="sidebar">
-		<h3>My Page Menu</h3>
-		<ul>
-			<li><a href="#account-info">Account Information</a></li>
-			<li><a href="#order-history">Order History</a></li>
-			<li><a href="/shopping/cart">Cart & Wishlist</a></li>
-			<li><a href="#payment-billing">Payment & Billing</a></li>
-			<li><a href="#product-reviews">Product Reviews</a></li>
-			<li><a href="#notifications">Notifications</a></li>
-			<li><a href="#coupons-points">Coupons & Points</a></li>
-			<li><a href="#shipping-addresses">Shipping Addresses</a></li>
-			<li><a href="#support">Customer Support</a></li>
-			<li><a href="#recommendations">Personalized Recommendations</a></li>
-		</ul>
-	</div>
+    <!-- Sidebar Section -->
+    <div class="sidebar">
+        <h3>My Page Menu</h3>
+        <ul>
+            <li><a href="#account-info">Account Information</a></li>
+            <li><a href="#order-history">Order History</a></li>
+            <li><a href="/shopping/cart">Cart & Wishlist</a></li>
+            <li><a href="#payment-billing">Payment & Billing</a></li>
+            <li><a href="#product-reviews">Product Reviews</a></li>
+            <li><a href="#notifications">Notifications</a></li>
+            <li><a href="#coupons-points">Coupons & Points</a></li>
+            <li><a href="#shipping-addresses">Shipping Addresses</a></li>
+            <li><a href="#support">Customer Support</a></li>
+            <li><a href="#recommendations">Personalized Recommendations</a></li>
+        </ul>
+    </div>
 
-	<div id="fh5co-intro-section" class="main-content">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2 animate-box text-center">
-					<h2 class="intro-heading">Welcome to Your Account</h2>
-					<p><span>Manage your profile and view your information</span></p>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div id="fh5co-intro-section" class="main-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 animate-box text-center">
+                    <h2 class="intro-heading">Welcome to Your Account</h2>
+                    <p><span>Manage your profile and view your information</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<!-- User Information Section -->
-	<div id="fh5co-contact-section" class="fh5co-section main-content">
-		<div class="container">
-			<div class="row">
-				<!-- user 객체가 null이 아닌 경우 -->
-				<div th:if="${user != null}">
-					<div class="col-md-6">
+    <!-- User Information Section -->
+    <div id="fh5co-contact-section" class="fh5co-section main-content">
+        <div class="container">
+            <div class="row">
+                <form id="user-info-form" th:action="@{/user/update_pro}" th:object="${loginUserBean}" method="post">
+                    <div th:if="${user != null}">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="userFn">First Name:</label>
+                                <input type="text" id="userFn" name="userFn" class="form-control" th:value="${user.userFn}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="userFny">First Name (Reading):</label>
+                                <input type="text" id="userFny" name="userFny" class="form-control" th:value="${user.userFny}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="userLn">Last Name:</label>
+                                <input type="text" id="userLn" name="userLn" class="form-control" th:value="${user.userLn}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="userLny">Last Name (Reading):</label>
+                                <input type="text" id="userLny" name="userLny" class="form-control" th:value="${user.userLny}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="userPhone">Phone No.:</label>
+                                <input type="text" id="userPhone" name="userPhone" class="form-control" th:value="${user.userPhone}" placeholder="Enter phone number">
+                            </div>
+                            <div class="form-group">
+                                <label for="userEmail">Email:</label>
+                                <input type="email" id="userEmail" name="userEmail" class="form-control" th:value="${user.userEmail}" placeholder="Enter email">
+                            </div>
+                            <div class="form-group">
+                                <label for="userAddress">Address:</label>
+                                <input type="text" id="userAddress" name="userAddress" class="form-control" th:value="${user.userAddress}" placeholder="Enter address">
+                            </div>
+                        </div>
+                    </div>
+                    <div th:if="${user == null}">
+                        <p>No user information available.</p>
+                    </div>
+                    <div class="col-md-12 text-center btn-spacing">
+                        <button type="submit" class="btn btn-success btn-lg">Save</button>
+                        <button type="button" class="btn btn-secondary btn-lg" onclick="window.history.back();">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-						<p><strong>First Name:</strong> <span th:text="${user.userFn}">[User First Name]</span></p>
-						<p><strong>First Name (Reading):</strong> <span th:text="${user.userFny}">[First Name (Phonetic)]</span></p>
-					</div>
-					<div class="col-md-6">
-						<p><strong>Last Name:</strong> <span th:text="${user.userLn}">[User Last Name]</span></p>
-						<p><strong>Last Name (Reading):</strong> <span th:text="${user.userLny}">[User Last Name Phonetic]</span></p>
-					</div>
-					<div class="col-md-6">
-						<p><strong>Email:</strong> <span th:text="${user.userEmail}">[User Email]</span></p>
-					</div>
-				</div>
-
-				<!-- user 객체가 null인 경우 -->
-				<div th:if="${user == null}">
-					<p>No user information available.</p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div th:replace="~{include/bottom :: bottomDiv}"></div>
-	<footer th:replace="~{include/bottom :: bottomFooter}"></footer>
-
+    <div th:replace="~{include/bottom :: bottomDiv}"></div>
+    <footer th:replace="~{include/bottom :: bottomFooter}"></footer>
 </div>
-
-<script src="/js/jquery.min.js"></script>
-<script src="/js/jquery.easing.1.3.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/jquery.waypoints.min.js"></script>
-<script src="/js/jquery.countTo.js"></script>
-<script src="/js/jquery.flexslider-min.js"></script>
-<script src="/js/main.js"></script>
 
 </body>
 </html>

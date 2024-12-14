@@ -1,77 +1,82 @@
 package com.example.maji.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "users")
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "USERS")
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
-    @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USER_IDX")
     private Long userIdx;
 
-    @Column(name = "user_fn")
+
+    @Column(name = "USER_FN", nullable = false)
     private String userFn;
 
-    @Column(name = "user_fny")
+    @Column(name = "USER_FNY", nullable = false)
     private String userFny;
 
-    @Column(name = "user_ln")
+    @Column(name = "USER_LN", nullable = false)
     private String userLn;
 
-    @Column(name = "user_lny")
+    @Column(name = "USER_LNY", nullable = false)
     private String userLny;
 
-    @Column(name = "user_id")
+    @Column(name = "USER_ID", nullable = false)
     private String userId;
 
-    @Column(name = "user_email")
+    @Column(name = "USER_EMAIL", nullable = true)
     private String userEmail;
 
-    @Column(name = "user_pass")
+    @Column(name = "USER_PASS", nullable = false)
     private String userPass;
 
-    @Column(name = "user_age")
+    @Column(name = "USER_AGE")
     private String userAge;
 
-    @Column(name = "user_date")
+    @Column(name = "USER_DATE")
     private LocalDateTime userDate;
 
-    @Column(name = "user_gender")
+    @Column(name = "USER_GENDER")
     private String userGender;
 
-    @Column(name = "user_address")
-    private String userAddress;
-
-    @Column(name = "user_img")
+    @Column(name = "USER_IMG")
     private String userImg;
 
-    @Column(name = "user_role")
+    @Column(name = "USER_ADDRESS")
+    private String userAddress;
+
+    @Column(name = "USER_PHONE")
+    private String userPhone;
+
+    @Column(name = "USER_ROLE")
     private String userRole;
 
-    @Column(name = "user_point")
-    private int userPoint;
+    @Column(name = "USER_POINT")
+    private Integer userPoint;
 
-    @Column(name = "user_phone")
-    private String userPhone;
+    @Column(name = "USER_STATUSTEXT")
+    private String userStatustext;
+
 
     // 사용자 이름을 한 번에 설정하는 메소드
     public void setUserName(String firstName, String lastName) {
         this.userFn = firstName;
         this.userLn = lastName;
+
     }
 
-    //-----------------------------
 
-    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ShoppingCartEntity> shoppingCarts;
 }

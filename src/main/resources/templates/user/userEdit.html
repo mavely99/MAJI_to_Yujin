@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit User</title>
+  <link rel="stylesheet" href="/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+  <h1>Edit User Information</h1>
+  <form id="edit-user-form">
+    <input type="hidden" id="userIdx" th:value="${user.userIdx}">
+    <div class="form-group">
+      <label for="userPhone">Phone Number:</label>
+      <input type="text" id="userPhone" class="form-control" th:value="${user.userPhone}">
+    </div>
+    <div class="form-group">
+      <label for="userEmail">Email:</label>
+      <input type="email" id="userEmail" class="form-control" th:value="${user.userEmail}">
+    </div>
+    <div class="form-group">
+      <label for="userAddress">Address:</label>
+      <input type="text" id="userAddress" class="form-control" th:value="${user.userAddress}">
+    </div>
+    <button type="button" class="btn btn-primary" onclick="updateUser()">Save Changes</button>
+    <button type="button" class="btn btn-secondary" onclick="window.history.back()">Cancel</button>
+  </form>
+</div>
+
+<script>
+  function updateUser() {
+      const userIdx = document.getElementById("userIdx").value;
+      const data = {
+          userPhone: document.getElementById("userPhone").value,
+          userEmail: document.getElementById("userEmail").value,
+          userAddress: document.getElementById("userAddress").value,
+      };
+
+      fetch(`/user/${userIdx}`, {
+          method: "PUT",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+      })
+      .then((response) => {
+          if (!response.ok) {
+              return response.text().then((text) => {
+                  throw new Error(text || "Update failed");
+              });
+          }
+          return response.text();
+      })
+      .then((message) => {
+          alert("User updated successfully!");
+          window.location.href = "/user/myPage_main";
+      })
+      .catch((error) => {
+          alert("Error: " + error.message);
+      });
+  }
+</script>
+</body>
+</html>
