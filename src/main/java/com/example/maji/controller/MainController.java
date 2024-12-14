@@ -40,10 +40,6 @@ public class MainController {
         return "content/content_main";
     }
 
-    @GetMapping("/myPage_main")
-    public String myPage_main(Model model) {
-        return "user/myPage_main";
-    }
 
     @GetMapping("/about_main")
     public String about_main(Model model) {

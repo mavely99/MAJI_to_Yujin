@@ -14,7 +14,9 @@ public class MainConfig {
     @SessionScope
     @Lazy
     public UserBean loginUserBean() {
+
         return new UserBean();
     }
+
 
 }
