@@ -15,12 +15,20 @@ public class ShoppingCartEntity {
     @SequenceGenerator(name = "shopping_cart_seq", sequenceName = "shopping_cart_seq", allocationSize = 1)
     private Long shoppingCartIdx;
 
+    @Column(name = "user_idx")
+    private Long userIdx;
+
+    @Column(name = "customizing_idx")
+    private Long customizingIdx;
+
+    //-----------------------------
+
     @ManyToOne
     @JoinColumn(name = "user_idx", insertable = false, updatable = false)
     private UserEntity userEntity;
 
     @ManyToOne
-    @JoinColumn(name = "content_idx", insertable = false, updatable = false)
-    private ContentEntity contentEntity;
+    @JoinColumn(name = "customizing_idx", insertable = false, updatable = false)
+    private CustomizingEntity customizingEntity;
 
 }

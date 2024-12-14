@@ -84,8 +84,6 @@ public class UserService {
     }
 
 
-
-
     public void updateUserInfo(UserBean testBean) {
 
         UserEntity userEntity = userRepository.findByUserIdx(testBean.getUserIdx())

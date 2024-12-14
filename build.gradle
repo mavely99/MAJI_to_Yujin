@@ -33,13 +33,11 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	implementation 'org.webjars:bootstrap:5.3.1'
 	implementation 'org.webjars:jquery:3.6.0'
-
-
 }
 
 tasks.withType(JavaCompile).configureEach {
 	options.compilerArgs.add("-parameters")
-}
+
 
 tasks.named('test') {
 	useJUnitPlatform()
